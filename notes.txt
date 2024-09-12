@@ -1,0 +1,340 @@
+create spring project with same lib 
+just add spring data jpa 
+
+create folders 
+add views folder 
+
+add tomcat embeded jasper 
+add all basic configuration that we have in spring 
+-----------------------------------------------------------------------
+
+
+table -> entity -> course 
+	courseId : integer: primary key 
+	courseName : String 
+	durationHR : 60
+	
+------------------------------------------------------------------------	
+
+1) create an interface extends JpaRepository 
+		UserRepository 
+		BatchRepository 
+2) JpaRepository<Table,Id>
+				 <UserEntity,Integer> 
+3) @Repository 
+				 
+--------------------------------------------------------------------------		 
+hibernate ->java ->  framework -> database -> SQL X 
+
+java -> core java -> hibernate { jar hibernate-core.jar }  
+		adv java -> hibernate { jar hibernate-core.jar }
+		spring -> hibernate   { spring starter spring-data-jap }
+		 
+
+spring project -> hibernate dep -> 
+						spring-data-jpa 
+								
+--------------------------------------------------------------------------
+Entity -> 
+table -> class -> entity -> create table 
+
+1) class 
+2) @Entity 
+3) @Table 
+4) variable 
+5) @Id  -> @GeneratedValue 
+
+-------------------------------------------------------------------------
+	
+insert delete update select where count -> sql 
+
+query -> 
+
+Repository -> 
+
+1) interface extends JpaRepository  
+2) JpaRepository<Entity,PkDataType>
+				<UserEntity,Integer>
+3) @Repository {optional} 
+				
+----------------------------------------------------------				 
+
+Lombok => 
+	bean/entity 
+			private 
+			getter
+			setter 
+
+class UserEntity{
+
+	private String fn;
+	private String ln;
+	private String em;
+ 	
+	//getters
+	//setters 
+	//manual work 
+	
+	
+	//constructor 
+}
+
+@Getters
+@Setters
+@FiledDefault -> private 
+@AllContructor
+class ProductEntity{
+
+	id
+	name
+	price
+	category
+	productImage
+}
+
+
+0) one time ---->  configured lombok in STS 
+1) pom.xml -> lombok -> maven | spring starter 
+
+
+ProductEntity -> variable -> private -> getters 
+
+
+window -> show view -> outline 
+
+
+
+------------------------------------------------------------------
+how to configure lombok in STS ? 
+	lombok download -> https://projectlombok.org/download
+	above url will download lombok.jar 
+	now double click on that it will open some GUI 
+	once you got your GUI -> click on specify location button -> browse ->
+	STS -> green icon of sts -> click select -> 
+	now click on install/update button -> lombok says install successfull -> quit installer ->
+	
+	*******YOU MUST HAVE TO RESTART STS*********  
+------------------------------------------------------------------	
+
+validation -> data -> 
+	empty -> 
+		1)required 
+		2)length
+		3)regex 
+		 
+		
+	if(email == null || email.trim().length() == 0){
+	
+		isError = true;
+		set 
+	}
+	if(isError == true ){
+		return "Signup";
+	}else{
+		db insertion 
+	}
+
+
+spring + hibernate -> 
+		hibernate validator 
+		
+1) add validator jar 
+2) use annotation in entity class {@NotBlank } 
+3) use @Validated and BindingResult in controller 
+4) using hasErrors() method you can get idea for validation fail or not 
+5) print error message on jsp { DIY }
+
+
+
+
+
+------------------------------------------------
+users -> 
+userId:pk 
+firstName
+email
+password
+
+
+address  ->
+addressId
+addressline1
+addressline2
+city
+state
+pincode 
+userId:FK 
+
+hibernate? 
+
+Relation -> 
+	1 to 1  
+	1 to M
+	M to M
+		
+{employee:company}
+{category:product}
+{person:aadhar}
+{ passport - person }
+
+zomato -> 
+1:1 
+
+
+user 
+1	ved 
+
+
+cart
+cartid userid	productId 
+1		1 		10
+2		1		20
+ 
+ 
+3 example 
+1:1
+1:M
+M:M
+
+-------------------------------------------------------------------------------
+users
+userId	firstName email	password 
+
+
+
+cart
+cartId	productId:fk	userId:fk 
+
+1:1
+1:M
+M:1
+M:M
+
+
+
+user : cart 
+1	 : M 
+
+
+
+
+Relation -> 
+	1 to 1  =>	[user:pan,country:capital,user:user_profile,user:user_setting,restaurant:address,product:product_detail]
+	1 to M 	=>  [restaurant:menu,user:order,manufacture:car,]
+	M to M	=>  [project:employee,product:categories,movies:actors,student:course] 
+
+
+	1 to 1  =>	[user:pan,country:capital,user:user_profile,user:user_setting,restaurant:address,product:product_detail]
+	
+	user					pan 
+	userId:pk				panNum:pk , userId:FK 
+					
+	country					capital 
+	countryId				capitalId,countryId
+	
+	user					userProfile
+	userId					userProfileId:pk,userId:fk
+	
+						
+
+	1 to M 	=>  [restaurant:menu,user:order,manufacture:car,]
+
+	restaurant			menu
+	restaurantId:pk		menuId:pk,restaurantId
+	
+	user				order
+	userId:pk			orderId:pk,userId:fk 
+
+
+	payment						creditCard 
+	paymentId:pk,cardID:fk		creditCard:pk 
+	
+	
+	
+	
+	M to M	=>  [project:employee,product:categories,movies:actors,student:course] 
+
+	project					employee				project_employee
+	projectId:pk			employeeId:pk	  		project_employee_Id:pk	projectId:fk employeeId:fk 
+	1	facebook			1	jett		 
+	2	x					2	omen
+	3	wire				3	kj
+	4	logitech			 
+	
+	
+ 	facebook->kj omen 
+ 	wire -> omen jett
+ 	x -> kj omen jett 
+ 	
+
+------------------------------------------------------------------------------------------------------------
+
+1:1 
+
+citizen 			
+citizenId:PK firstname email 		
+
+
+pan 
+pannum address citizenid:FK
+
+
+
+1:M
+ 
+customer
+	customerId firstName gender 
+order 
+	orderId date customerId amount 
+	
+
+1 customer -> n orders 
+1 order -> 1 customer 
+n orders -> 1 customer 
+
+
+ 1 to many -> 
+-----------------------------------------------------
+
+M to M	=>  [project:employee]
+	
+Employee 
+employeeId		firstName		
+1				ram			
+2				shyam
+3				ganshyam
+4				ravan
+
+project
+projectId	title	technology	 
+100			fb		MERN		 
+200			wa		MEAN
+300			gpt		Spring 
+	 
+project_employee 
+projectId 	employeeId 	 
+
+
+1->project -> Many
+1->employee-> Many 
+
+Many to Many 
+
+
+we need to create third table 
+
+-----------------------------------------------------------
+ 
+ 	 
+
+
+
+
+
+
+
+
+
+
+
+
